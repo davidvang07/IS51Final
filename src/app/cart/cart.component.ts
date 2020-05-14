@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ToastService } from '../toast/toast.service';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-cart',
@@ -20,13 +21,32 @@ export class CartComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.loadDefaultBikes();
   }
 
-  async loadBikesFromJson() {
-    this.bikes = await this.loadBikesFromJson();
-    console.log('this.bikes from ngOninit...'), this.bikes); 
-    const bikes = await this.http.get('assets/inventory.json');.toPromise();
-    return bikes.json();
+  loadDefaultBikes() {
+    this.bikes = [{
+      'id': 1,
+      'image': '../../assets/bike1.jpeg',
+      'description': 'Bike Model 1',
+      'price': 5000,
+      'quantity': 1
+    },
+    {
+      'id': 2,
+      'image': '../../assets/bike2.jpeg',
+      'description': 'Bike Model 2',
+      'price': 4000,
+      'quantity': 2
+    },
+    {
+      'id': 3,
+      'image': '../../assets/bike3.jpeg',
+      'description': 'Bike Model 3',
+      'price': 3000,
+      'quantity': 3
+    }]
+  
   }
 
 }
